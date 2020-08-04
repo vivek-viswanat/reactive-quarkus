@@ -28,3 +28,25 @@ Or you can use Docker to build the native executable using: `./mvnw package -Pna
 You can then execute your binary: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image-guide .
+
+## Deployment
+
+### Native deployment in Docker
+````
+> ./mvnw package -Pnative -Dquarkus.native.container-build=true    
+> docker build -f src/main/docker/Dockerfile.native -t quarkus/code-with-quarkus . 
+> docker run -d --rm -p 8080:8080 --name java-quarkus-native --cpus 2 quarkus/code-with-quarkus
+````
+
+### JVM deployment in Docker
+````
+> ./mvnw package
+> docker build -f src/main/docker/Dockerfile.jvm -t quarkus/code-with-quarkus-jvm .
+> docker run -d --rm -p 8080:8080 --name java-quarkus-jvm --cpus 2 quarkus/code-with-quarkus
+````
+
+## Benchmark
+````
+> cargo install drill
+> drill --benchmark benchmark.yml --stats
+````

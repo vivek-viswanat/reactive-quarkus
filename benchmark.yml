@@ -1,0 +1,12 @@
+---
+
+rampup: 10
+threads: 150
+base: 'http://localhost:8080'
+iterations: 100
+
+plan:
+  - name: Sum Request
+    request:
+      url: /hello/sum/5/4
+
